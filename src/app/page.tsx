@@ -3,6 +3,8 @@ import Image from "next/image";
 import { HeroSlideshow } from "@/components/HeroSlideshow";
 import { HomeNewsList } from "@/components/HomeNewsList";
 import { T } from "@/components/T";
+import { publicationsByYear } from "@/data/publications";
+import { memberGroups, pi } from "@/data/members";
 
 const slides = [
   {
@@ -103,6 +105,10 @@ const pillarStyles: Record<string, string> = {
 };
 
 export default function HomePage() {
+  const totalPapers = publicationsByYear.reduce((s, y) => s + y.items.length, 0);
+  const totalMembers = 1 + memberGroups.reduce((s, g) => s + g.members.length, 0);
+  void pi;
+
   return (
     <div>
       {/* hero */}
@@ -119,9 +125,13 @@ export default function HomePage() {
         <div className="container-edge relative pt-16 pb-20 md:pt-24 md:pb-28">
           <div className="grid items-center gap-14 md:grid-cols-12">
             <div className="md:col-span-7">
-              <div className="inline-flex items-center gap-2 rounded-pill border border-line bg-ivory/70 px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-wider text-bark/80">
-                <span className="h-1.5 w-1.5 rounded-full bg-orange" />
-                Designing the Gut · Est. 2025
+              <div className="flex items-baseline gap-3 font-serif italic">
+                <span className="text-[14px] text-orange">est.</span>
+                <span className="font-mono not-italic text-[12px] tracking-[0.18em] text-bark/70">
+                  2 0 1 2
+                </span>
+                <span className="h-px flex-1 max-w-[120px] bg-orange/40" />
+                <span className="text-[13.5px] text-bark/75">Tsuruoka, Yamagata</span>
               </div>
               <h1 className="display-h mt-6 text-[44px] leading-[1.02] md:text-[68px]">
                 <T
@@ -175,15 +185,19 @@ export default function HomePage() {
               <dl className="mt-7 grid grid-cols-3 gap-2 rounded-soft border border-line bg-ivory/60 p-4">
                 <div className="text-center">
                   <dt className="text-[10px] uppercase tracking-wider text-barkMute">Papers</dt>
-                  <dd className="mt-1 font-display text-2xl font-semibold text-orange">116+</dd>
+                  <dd className="mt-1 font-display text-2xl font-semibold tabular-nums text-orange">
+                    {totalPapers}
+                  </dd>
                 </div>
                 <div className="border-x border-line text-center">
                   <dt className="text-[10px] uppercase tracking-wider text-barkMute">Members</dt>
-                  <dd className="mt-1 font-display text-2xl font-semibold text-teal">18</dd>
+                  <dd className="mt-1 font-display text-2xl font-semibold tabular-nums text-teal">
+                    {totalMembers}
+                  </dd>
                 </div>
                 <div className="text-center">
                   <dt className="text-[10px] uppercase tracking-wider text-barkMute">Since</dt>
-                  <dd className="mt-1 font-display text-2xl font-semibold text-bark">2025</dd>
+                  <dd className="mt-1 font-display text-2xl font-semibold text-bark">2012</dd>
                 </div>
               </dl>
             </div>

@@ -1,9 +1,13 @@
 import { PageMasthead } from "@/components/PageMasthead";
 import { PublicationsCount } from "@/components/PublicationsCount";
+import { TotalPapers } from "@/components/TotalPapers";
 import { publicationsByYear } from "@/data/publications";
+import { fetchCitation, throttledMap, type WorkInfo } from "@/lib/openalex";
 import { T } from "@/components/T";
 
 export const metadata = { title: "Publications" };
+// 🐱 re-fetch citation counts daily
+export const revalidate = 86400;
 
 function renderAuthors(authors: string) {
   const parts = authors.split(/(\*\*[^*]+\*\*)/g);
@@ -19,8 +23,36 @@ function renderAuthors(authors: string) {
   });
 }
 
-export default function PublicationsPage() {
-  const total = publicationsByYear.reduce((s, y) => s + y.items.length, 0);
+type Item = { title: string; authors: string; journal: string };
+type Enriched = Item & { cite?: WorkInfo | null };
+
+async function enrich(): Promise<Array<{ year: string; items: Enriched[] }>> {
+  const flat = publicationsByYear.flatMap((y) =>
+    y.items.map((p) => ({ year: y.year, ...p }))
+  );
+
+  const cites = await throttledMap(flat, 6, (p) => fetchCitation(p.title, p.year));
+
+  const byYear = new Map<string, Enriched[]>();
+  flat.forEach((p, i) => {
+    if (!byYear.has(p.year)) byYear.set(p.year, []);
+    byYear.get(p.year)!.push({
+      title: p.title,
+      authors: p.authors,
+      journal: p.journal,
+      cite: cites[i]
+    });
+  });
+  return [...byYear.entries()].map(([year, items]) => ({ year, items }));
+}
+
+export default async function PublicationsPage() {
+  const enriched = await enrich();
+  const totalPapers = publicationsByYear.reduce((s, y) => s + y.items.length, 0);
+  const totalCitations = enriched.reduce(
+    (s, y) => s + y.items.reduce((ss, it) => ss + (it.cite?.citations ?? 0), 0),
+    0
+  );
 
   return (
     <div>
@@ -30,14 +62,42 @@ export default function PublicationsPage() {
         accent={<T ja="Selected Works." en="Selected Works." />}
         lede={
           <T
-            ja={`査読付き原著論文を中心に、研究室の出版実績をまとめています。総計 ${total} 編。`}
-            en={`Peer-reviewed original papers and reviews from the lab. ${total} entries in total.`}
+            ja="査読付き原著論文を中心に、研究室の出版実績をまとめています。"
+            en="Peer-reviewed original papers and reviews from the lab."
           />
         }
       />
 
+      {/* live stats strip */}
+      <section className="container-edge mt-10">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <TotalPapers count={totalPapers} />
+          <div className="rounded-chunk bg-bark text-sand p-6">
+            <p className="text-[11px] uppercase tracking-wider text-gold">
+              Total citations
+            </p>
+            <p className="mt-2 font-display text-4xl font-semibold tabular-nums">
+              {totalCitations.toLocaleString()}
+            </p>
+            <p className="mt-1 text-[11.5px] text-sand/70">
+              via OpenAlex · <T ja="毎日更新" en="updated daily" />
+            </p>
+          </div>
+          <div className="rounded-chunk bg-teal text-sand p-6">
+            <p className="text-[11px] uppercase tracking-wider text-gold">
+              <T ja="活動期間" en="Active since" />
+            </p>
+            <p className="mt-2 font-display text-4xl font-semibold tabular-nums">2012</p>
+            <p className="mt-1 text-[11.5px] text-sand/70">
+              {publicationsByYear[publicationsByYear.length - 1]?.year} —{" "}
+              {publicationsByYear[0]?.year}
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="container-edge mt-16 space-y-20">
-        {publicationsByYear.map((y) => (
+        {enriched.map((y) => (
           <section key={y.year}>
             <div className="flex items-baseline gap-5">
               <h2 className="display-h text-5xl text-bark md:text-6xl">{y.year}</h2>
@@ -55,9 +115,25 @@ export default function PublicationsPage() {
                     <span className="chip">{String(i + 1).padStart(2, "0")}</span>
                   </div>
                   <div className="col-span-12 md:col-span-11">
-                    <p className="font-display text-[18.5px] leading-snug text-bark md:text-[19.5px]">
-                      {p.title}
-                    </p>
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <p className="font-display text-[18.5px] leading-snug text-bark md:text-[19.5px]">
+                        {p.title}
+                      </p>
+                      {p.cite ? (
+                        <a
+                          href={p.cite.doi ?? p.cite.openalexId ?? "#"}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex flex-shrink-0 items-center gap-1.5 rounded-pill border border-orange/30 bg-orange/10 px-3 py-1.5 text-[11.5px] font-medium text-orange transition-colors hover:bg-orange hover:text-white"
+                          aria-label={`${p.cite.citations} citations`}
+                        >
+                          <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current" aria-hidden>
+                            <path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z" />
+                          </svg>
+                          <span className="tabular-nums">{p.cite.citations}</span>
+                        </a>
+                      ) : null}
+                    </div>
                     <p className="mt-2.5 text-[13.5px] leading-relaxed text-bark/85">
                       {renderAuthors(p.authors)}
                     </p>

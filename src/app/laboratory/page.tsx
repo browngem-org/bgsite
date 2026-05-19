@@ -25,8 +25,8 @@ export default function LaboratoryPage() {
       <section className="container-edge mt-12">
         <div className="relative aspect-[16/9] w-full overflow-hidden rounded-chunk shadow-soft">
           <Image
-            src="https://raw.githubusercontent.com/browngem-org/photo/14cba80a53595be1f1e1b5dc7afb2e92706666bc/laboratory/LaboKorea.jpg"
-            alt="Group photo"
+            src="https://raw.githubusercontent.com/browngem-org/photo/main/laboratory/laboverview.jpeg"
+            alt="Lab overview"
             fill
             sizes="(max-width: 768px) 100vw, 1240px"
             className="object-cover"

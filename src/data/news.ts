@@ -19,6 +19,50 @@ export type NewsItem = {
 
 export const newsItems: NewsItem[] = [
   {
+    date: "2026.12.31",
+    category: "paper",
+    body:
+      "中藤学さんらのモノクローナル抗体を用いた Bifidobacterium longum の選択的濃縮に関する研究成果が国際科学誌『Gut Microbes Reports』に掲載されました。",
+    bodyEn:
+      "Gaku Nakato et al. published a study on monoclonal-antibody-based selective enrichment of Bifidobacterium longum in Gut Microbes Reports.",
+    href: "https://doi.org/10.1080/29933935.2026.2663732",
+    hrefLabel: "詳細はこちら",
+    hrefLabelEn: "Read the paper"
+  },
+  {
+    date: "2026.03.12",
+    category: "paper",
+    body:
+      "尾花望さんらのヒト腸内細菌 Mediterraneibacter gnavus の遺伝学的ツールキット開発と莢膜多糖の定着因子に関する研究成果が国際科学誌『Nature Communications』に掲載されました。",
+    bodyEn:
+      "Nozomu Obana et al. published a study on a genetic toolkit for Mediterraneibacter gnavus and capsular polysaccharides as a colonization factor in Nature Communications.",
+    href: "https://doi.org/10.1038/s41467-026-69022-x",
+    hrefLabel: "詳細はこちら",
+    hrefLabelEn: "Read the paper"
+  },
+  {
+    date: "2026.03.12",
+    category: "paper",
+    body:
+      "市村涼葉さんらの骨髄移植ドナー由来と糞便微生物移植後の腸内細菌叢組成の関連に関する研究成果が国際科学誌『Scientific Reports』に掲載されました。",
+    bodyEn:
+      "Ryoha Ichimura et al. published a study on the association between bone-marrow-donor origin and gut microbiota composition after FMT in mice in Scientific Reports.",
+    href: "https://doi.org/10.1038/s41598-026-36933-0",
+    hrefLabel: "詳細はこちら",
+    hrefLabelEn: "Read the paper"
+  },
+  {
+    date: "2026.02.12",
+    category: "paper",
+    body:
+      "四宮彩名さんらのヒト大腸がん患者の便から分離した Solobacterium moorei 10714-02 のゲノム解読に関する研究成果が国際科学誌『Microbiology Resource Announcements』に掲載されました。",
+    bodyEn:
+      "Ayana Shinomiya et al. published the complete genome sequence of Solobacterium moorei 10714-02 isolated from a human colorectal cancer patient in Microbiology Resource Announcements.",
+    href: "https://doi.org/10.1128/mra.00981-25",
+    hrefLabel: "詳細はこちら",
+    hrefLabelEn: "Read the paper"
+  },
+  {
     date: "2025.12.26",
     category: "media",
     body: "福田さんがPIVOTのYouTubeチャンネルに出演しました。",

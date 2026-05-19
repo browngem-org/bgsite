@@ -11,6 +11,31 @@ export type PublicationYear = {
 
 export const publicationsByYear: PublicationYear[] = [
   {
+    "year": "2026",
+    "items": [
+      {
+        "title": "Development of a monoclonal antibody-based approach for selective enrichment of target Bifidobacterium longum from a complex fecal community",
+        "authors": "**Gaku Nakato**, Hikaru Inoue, Satoshi Onawa, Risako Furukawa, **Nozomu Obana**, Kazuki Tanaka, Hitosi Agematu, **Isaiah Song**, Joe Inoue, **Shinji Fukuda**",
+        "journal": "Gut Microbes Reports 2026"
+      },
+      {
+        "title": "A genetic toolkit for the human gut bacterium Mediterraneibacter gnavus identifies capsular polysaccharides as a competitive colonization factor",
+        "authors": "**Nozomu Obana**, **Gaku Nakato**, Nobuhiko Nomura, **Shinji Fukuda**",
+        "journal": "Nature Communications 2026"
+      },
+      {
+        "title": "Association between bone marrow donor origin and gut microbiota composition following fecal microbiota transplantation in mice",
+        "authors": "**Ryoha Ichimura**, Kazuki Tanaka, **Isaiah Song**, Eisuke Shimizu, Yoko Ogawa, Kazuo Tsubota, **Shinji Fukuda**",
+        "journal": "Scientific Reports 2026; 16: 13314"
+      },
+      {
+        "title": "Complete genome sequence of Solobacterium moorei 10714-02 isolated from the stool of a human colorectal cancer patient",
+        "authors": "**Ayana Shinomiya**, **Kota Oshibuchi**, **Jiayue Yang**, **Shinji Fukuda**, Kazuharu Arakawa, Catherine Putonti",
+        "journal": "Microbiology Resource Announcements 2026"
+      }
+    ]
+  },
+  {
     "year": "2025",
     "items": [
       {

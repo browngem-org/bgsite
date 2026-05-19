@@ -69,8 +69,8 @@ export const pi: Member = {
   locationEn: "TTCK",
   email: "fukuda at iab.keio.ac.jp",
   photo: "https://www.iab.keio.ac.jp/research-project/files/fukuda.jpg",
-  likes: "温泉、日本酒、発酵食品",
-  likesEn: "Hot springs, sake, and fermented foods",
+  likes: "温泉、腸内細菌",
+  likesEn: "Hot springs and the gut microbiome",
   links: [
     { type: "researchmap", href: "https://researchmap.jp/shinji_fukuda", label: "researchmap" }
   ]
@@ -146,30 +146,12 @@ export const memberGroups: MemberGroup[] = [
     subheadingEn: "Graduate & undergraduate",
     members: [
       {
-        name: "岡本さん",
-        nameEn: "Haruto IKEDA",
-        grade: "D2",
-        gradeEn: "D2",
-        location: "TTCK",
-        email: "tanaka at iab.keio.ac.jp",
-        photo: placeholder
-      },
-      {
         name: "池田 陽人",
         nameEn: "Haruto IKEDA",
         grade: "M2",
         gradeEn: "M2",
         location: "TTCK",
         email: "tanaka at iab.keio.ac.jp",
-        photo: placeholder
-      },
-      {
-        name: "岡本さん",
-        nameEn: "Misaki SATO",
-        grade: "D2",
-        gradeEn: "D2",
-        location: "TTCK",
-        email: "sato at iab.keio.ac.jp",
         photo: placeholder
       },
       {
@@ -183,15 +165,6 @@ export const memberGroups: MemberGroup[] = [
         locationEn: "SFC · RIKEN",
         email: "ayana-shinomiya12 at keio.jp",
         photo: "https://raw.githubusercontent.com/browngem-org/photo/main/members/Ayanashinomiya.jpg"
-      },
-      {
-        name: "市村 涼葉",
-        nameEn: "Ryoha ICHIMURA",
-        grade: "M2",
-        gradeEn: "M2",
-        location: "鶴岡メタボロームキャンパス",
-        locationEn: "Tsuruoka Metabolome Campus",
-        photo: placeholder
       },
       {
         name: "石川 小花",
@@ -222,8 +195,8 @@ export const memberGroups: MemberGroup[] = [
         nameEn: "Tsubasa SATO",
         grade: "B1",
         gradeEn: "B1",
-        field: "宇宙生物学",
-        fieldEn: "Astrobiology",
+        field: "宇宙生物科学",
+        fieldEn: "Astrobiological Sciences",
         location: "SFC・東京科学大学",
         locationEn: "SFC · Institute of Science Tokyo",
         email: "sato.mb at keio.jp",
@@ -299,6 +272,18 @@ export const memberGroups: MemberGroup[] = [
  * Add entries below as graduates leave the lab.
  */
 export const alumni: Alumnus[] = [
-  // Placeholder examples — replace with real alumni
-  // { name: "山田 太郎", nameEn: "Taro YAMADA", year: "2024", program: "修士課程", programEn: "Master's" },
+  {
+    name: "市村 涼葉",
+    nameEn: "Ryoha ICHIMURA",
+    year: "2026",
+    program: "修士課程",
+    programEn: "Master's"
+  },
+  {
+    name: "岡本さん",
+    nameEn: "OKAMOTO",
+    year: "2026",
+    program: "修士課程",
+    programEn: "Master's"
+  }
 ];

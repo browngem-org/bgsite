@@ -122,49 +122,50 @@ export default async function PublicationsPage() {
               {y.items.map((p, i) => (
                 <li
                   key={i}
-                  className="card-soft grid grid-cols-12 gap-4 p-6 md:gap-8 md:p-8"
+                  className="card-soft grid grid-cols-12 gap-4 p-6 md:gap-6 md:p-8"
                 >
                   <div className="col-span-12 md:col-span-1">
                     <span className="chip">{String(i + 1).padStart(2, "0")}</span>
                   </div>
-                  <div className="col-span-12 md:col-span-11">
-                    <div className="flex flex-wrap items-start justify-between gap-4">
-                      <p className="font-display text-[18.5px] leading-snug text-bark md:text-[19.5px]">
-                        {p.title}
-                      </p>
-                      <div className="flex flex-shrink-0 items-center gap-3">
-                        {bareDoi(p.cite?.doi) && (
-                          <div
-                            className="altmetric-embed flex-shrink-0"
-                            data-badge-type="donut"
-                            data-badge-popover="left"
-                            data-link-target="_blank"
-                            data-hide-no-mentions="true"
-                            data-doi={bareDoi(p.cite?.doi) ?? ""}
-                          />
-                        )}
-                        {p.cite ? (
-                          <a
-                            href={p.cite.doi ?? p.cite.openalexId ?? "#"}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="flex items-center gap-1.5 rounded-pill border border-orange/30 bg-orange/10 px-3 py-1.5 text-[11.5px] font-medium text-orange transition-colors hover:bg-orange hover:text-white"
-                            aria-label={`${p.cite.citations} citations`}
-                          >
-                            <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current" aria-hidden>
-                              <path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z" />
-                            </svg>
-                            <span className="tabular-nums">{p.cite.citations}</span>
-                          </a>
-                        ) : null}
-                      </div>
-                    </div>
+                  <div className="col-span-12 md:col-span-8 lg:col-span-9">
+                    <p className="font-display text-[18.5px] leading-snug text-bark md:text-[19.5px]">
+                      {p.title}
+                    </p>
                     <p className="mt-2.5 text-[13.5px] leading-relaxed text-bark/85">
                       {renderAuthors(p.authors)}
                     </p>
                     <p className="mt-1 text-[13px] text-teal">
                       <span className="font-medium">{p.journal}</span>
                     </p>
+                  </div>
+
+                  {/* 🐱 right stats column — always at the right edge */}
+                  <div className="col-span-12 md:col-span-3 lg:col-span-2 flex items-start justify-end gap-3 md:flex-col md:items-end md:gap-3">
+                    {bareDoi(p.cite?.doi) && (
+                      <div
+                        className="altmetric-embed flex-shrink-0"
+                        data-badge-type="donut"
+                        data-badge-popover="left"
+                        data-link-target="_blank"
+                        data-hide-no-mentions="true"
+                        data-doi={bareDoi(p.cite?.doi) ?? ""}
+                      />
+                    )}
+                    {p.cite ? (
+                      <a
+                        href={p.cite.doi ?? p.cite.openalexId ?? "#"}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 rounded-pill border border-orange/30 bg-orange/10 px-3 py-1.5 text-[11.5px] font-medium text-orange transition-colors hover:bg-orange hover:text-white"
+                        aria-label={`${p.cite.citations} citations`}
+                      >
+                        <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current" aria-hidden>
+                          <path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z" />
+                        </svg>
+                        <span className="tabular-nums">{p.cite.citations}</span>
+                        <span className="text-[10px] opacity-70">cites</span>
+                      </a>
+                    ) : null}
                   </div>
                 </li>
               ))}

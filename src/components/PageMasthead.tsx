@@ -1,28 +1,36 @@
 export function PageMasthead({
   eyebrow,
   title,
-  italic,
+  accent,
   lede
 }: {
   eyebrow: string;
   title: string;
-  italic?: string;
+  accent?: string;
   lede?: string;
 }) {
   return (
-    <section className="container-edge pt-12 md:pt-20">
-      <div className="grid items-end gap-8 border-b border-hairline pb-10 md:grid-cols-12">
+    <section className="relative overflow-hidden bg-sandLight">
+      <div
+        aria-hidden
+        className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-orange/10 blur-3xl"
+      />
+      <div
+        aria-hidden
+        className="absolute -bottom-24 -left-20 h-64 w-64 rounded-full bg-teal/10 blur-3xl"
+      />
+      <div className="container-edge relative grid gap-10 py-20 md:grid-cols-12 md:py-24">
         <div className="md:col-span-8">
           <p className="eyebrow">{eyebrow}</p>
-          <h1 className="display mt-5 text-[12vw] leading-[0.95] md:text-[88px]">
+          <h1 className="display-h mt-4 text-[44px] leading-[1.05] md:text-[72px]">
             {title}
-            {italic ? <span className="italic font-light"> {italic}</span> : null}
+            {accent ? <span className="text-orange"> {accent}</span> : null}
           </h1>
         </div>
         {lede ? (
-          <p className="md:col-span-4 md:pl-8 md:border-l md:border-hairline text-[14px] leading-[1.95] text-graphite/90">
-            {lede}
-          </p>
+          <div className="md:col-span-4 md:self-end">
+            <p className="text-[14.5px] leading-[1.95] text-bark/85">{lede}</p>
+          </div>
         ) : null}
       </div>
     </section>

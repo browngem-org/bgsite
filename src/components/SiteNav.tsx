@@ -8,30 +8,34 @@ export function SiteNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="container-edge">
-      <ul className="flex flex-wrap items-center gap-x-7 gap-y-3 py-4 text-[12px] uppercase tracking-[0.18em] text-graphite/90">
-        {navItems.map((item) => {
-          const isActive =
-            item.href === "/"
-              ? pathname === "/"
-              : pathname?.startsWith(item.href);
-          return (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className={`group inline-flex items-baseline gap-1.5 transition-colors ${
-                  isActive ? "text-terracotta" : "hover:text-terracotta"
-                }`}
-              >
-                <span className="text-[9px] tracking-widest text-mute group-hover:text-terracotta">
-                  {item.index}
-                </span>
-                <span className="link-underline">{item.label}</span>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+    <nav className="border-y border-line/70 bg-sand/40">
+      <div className="container-edge overflow-x-auto">
+        <ul className="flex min-w-max items-center gap-1 py-1">
+          {navItems.map((item) => {
+            const isActive =
+              item.href === "/"
+                ? pathname === "/"
+                : pathname?.startsWith(item.href);
+            return (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className={`relative inline-flex items-center gap-1.5 rounded-pill px-4 py-2 text-[13px] font-medium tracking-wider transition-colors ${
+                    isActive
+                      ? "bg-bark text-sand"
+                      : "text-bark hover:bg-sandDeep/60"
+                  }`}
+                >
+                  <span className="text-[10px] tracking-wider opacity-60">
+                    {item.index}
+                  </span>
+                  <span>{item.label}</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </nav>
   );
 }

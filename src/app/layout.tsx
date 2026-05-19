@@ -1,35 +1,20 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter, Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
+import { Rubik, Zen_Kaku_Gothic_New } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
-const cormorant = Cormorant_Garamond({
+const zenKaku = Zen_Kaku_Gothic_New({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-cormorant",
+  weight: ["300", "400", "500", "700", "900"],
+  variable: "--font-zen-kaku",
   display: "swap"
 });
 
-const inter = Inter({
+const rubik = Rubik({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-inter",
-  display: "swap"
-});
-
-const notoSansJp = Noto_Sans_JP({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  variable: "--font-noto-sans-jp",
-  display: "swap"
-});
-
-const notoSerifJp = Noto_Serif_JP({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-noto-serif-jp",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-rubik",
   display: "swap"
 });
 
@@ -50,11 +35,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="ja"
-      className={`${cormorant.variable} ${inter.variable} ${notoSansJp.variable} ${notoSerifJp.variable}`}
-    >
-      <body className="font-sans bg-paper text-ink">
+    <html lang="ja" className={`${zenKaku.variable} ${rubik.variable}`}>
+      <body className="font-sans bg-sand text-bark antialiased">
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />

@@ -10,34 +10,39 @@ export function LabHistoryTabs() {
 
   return (
     <div>
-      <div className="-mx-2 flex gap-1 overflow-x-auto border-b border-hairline pb-3">
+      <div className="-mx-2 flex gap-2 overflow-x-auto pb-2">
         {historyEntries.map((h) => {
           const isActive = h.id === active;
           return (
             <button
               key={h.id}
               onClick={() => setActive(h.id)}
-              className={`whitespace-nowrap px-3 py-2 font-serif text-[14px] leading-none transition-colors ${
-                isActive ? "text-ink" : "text-mute hover:text-graphite"
+              className={`whitespace-nowrap rounded-pill px-4 py-2 text-[13px] font-medium transition-colors ${
+                isActive
+                  ? "bg-bark text-sand"
+                  : "border border-line bg-ivory text-bark hover:border-orange hover:text-orange"
               }`}
             >
-              <span className={isActive ? "italic" : ""}>{h.title}</span>
+              {h.title}
             </button>
           );
         })}
       </div>
 
-      <div key={current.id} className="mt-8 animate-fadeIn">
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-mute">{current.date}</p>
-        <p className="mt-2 max-w-2xl font-serif text-[16px] italic leading-relaxed text-graphite">
+      <div key={current.id} className="mt-10 animate-fadeIn rounded-chunk bg-ivory p-7 shadow-ring md:p-10">
+        <div className="flex items-baseline gap-3">
+          <span className="chip-teal">{current.date}</span>
+          <h3 className="font-display text-xl font-medium text-bark">{current.title}</h3>
+        </div>
+        <p className="mt-4 max-w-3xl text-[14.5px] leading-relaxed text-bark/90">
           {current.description}
         </p>
 
-        <div className="mt-6 -mx-6 flex gap-3 overflow-x-auto px-6 pb-3">
+        <div className="mt-7 -mx-2 flex gap-4 overflow-x-auto px-2 pb-2">
           {current.photos.map((src, i) => (
             <div
               key={src + i}
-              className="relative h-[260px] w-[380px] flex-shrink-0 overflow-hidden bg-cream photo-mono"
+              className="relative h-[260px] w-[380px] flex-shrink-0 overflow-hidden rounded-soft bg-sandDeep shadow-ring"
             >
               <Image
                 src={src}

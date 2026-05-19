@@ -8,7 +8,7 @@ function renderAuthors(authors: string) {
   return parts.map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return (
-        <span key={i} className="font-medium text-ink">
+        <span key={i} className="font-semibold text-orange">
           {part.slice(2, -2)}
         </span>
       );
@@ -23,40 +23,41 @@ export default function PublicationsPage() {
   return (
     <div>
       <PageMasthead
-        eyebrow="§ 02 — Publications"
-        title="Selected"
-        italic="Works."
+        eyebrow="Publications"
+        title="論文一覧"
+        accent="Selected Works."
         lede={`査読付き原著論文を中心に、研究室の出版実績をまとめています。総計 ${total} 編。`}
       />
 
-      <section className="container-edge mt-12 space-y-20">
+      <section className="container-edge mt-16 space-y-20">
         {publicationsByYear.map((y) => (
           <section key={y.year}>
-            <div className="flex items-baseline gap-6">
-              <h2 className="font-serif text-6xl font-light leading-none md:text-7xl">{y.year}</h2>
-              <span className="h-px flex-1 bg-hairline" />
-              <span className="font-mono text-[11px] tracking-widest text-mute">
+            <div className="flex items-baseline gap-5">
+              <h2 className="display-h text-5xl text-bark md:text-6xl">{y.year}</h2>
+              <span className="h-px flex-1 bg-line" />
+              <span className="font-mono text-[11px] tracking-wider text-barkMute">
                 {y.items.length} {y.items.length === 1 ? "paper" : "papers"}
               </span>
             </div>
 
-            <ol className="mt-10 divide-y divide-hairline border-t border-hairline">
+            <ol className="mt-8 space-y-4">
               {y.items.map((p, i) => (
-                <li key={i} className="grid grid-cols-12 gap-4 py-7 md:gap-8">
+                <li
+                  key={i}
+                  className="card-soft grid grid-cols-12 gap-4 p-6 md:gap-8 md:p-8"
+                >
                   <div className="col-span-12 md:col-span-1">
-                    <p className="font-mono text-[11px] tracking-widest text-mute">
-                      {String(i + 1).padStart(2, "0")}
-                    </p>
+                    <span className="chip">{String(i + 1).padStart(2, "0")}</span>
                   </div>
                   <div className="col-span-12 md:col-span-11">
-                    <p className="font-serif text-[19px] leading-snug text-ink md:text-[20px]">
+                    <p className="font-display text-[18.5px] leading-snug text-bark md:text-[19.5px]">
                       {p.title}
                     </p>
-                    <p className="mt-2 text-[13.5px] leading-relaxed text-graphite/90">
+                    <p className="mt-2.5 text-[13.5px] leading-relaxed text-bark/85">
                       {renderAuthors(p.authors)}
                     </p>
-                    <p className="mt-1 font-serif text-[13.5px] italic text-terracotta">
-                      {p.journal}
+                    <p className="mt-1 text-[13px] text-teal">
+                      <span className="font-medium">{p.journal}</span>
                     </p>
                   </div>
                 </li>

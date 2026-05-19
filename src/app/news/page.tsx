@@ -7,12 +7,12 @@ export default function NewsPage() {
   return (
     <div>
       <PageMasthead
-        eyebrow="§ 05 — News"
-        title="News &"
-        italic="Notes."
-        lede="論文発表、受賞、メディア掲載など、研究室の最新トピックスを年別にまとめています。"
+        eyebrow="News"
+        title="お知らせ"
+        accent="& Notes."
+        lede="論文発表、受賞、メディア掲載など、研究室の最新トピックスをまとめています。"
       />
-      <section className="container-edge mt-14">
+      <section className="container-edge mt-16">
         <NewsFilter />
       </section>
     </div>

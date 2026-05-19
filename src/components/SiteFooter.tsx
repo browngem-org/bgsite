@@ -5,28 +5,42 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-32 border-t border-hairline bg-cream/40">
-      <div className="container-edge grid gap-12 py-16 md:grid-cols-12">
+    <footer className="mt-32 bg-bark text-sand">
+      <div className="container-edge grid gap-14 py-20 md:grid-cols-12">
         <div className="md:col-span-5">
-          <p className="eyebrow">Colophon</p>
-          <p className="mt-4 font-serif text-3xl leading-tight">
-            Fukuda <span className="italic font-light">Laboratory</span>
-          </p>
-          <p className="mt-3 max-w-md text-sm leading-relaxed text-graphite/80">
+          <div className="flex items-center gap-3">
+            <span
+              aria-hidden
+              className="grid h-12 w-12 place-items-center rounded-full bg-orange text-ivory shadow-soft"
+            >
+              <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current">
+                <path d="M12 2.5c-3 2.5-5.5 5.5-5.5 9.5 0 4 2.5 7 5.5 9.5 3-2.5 5.5-5.5 5.5-9.5 0-4-2.5-7-5.5-9.5zm0 4c1.6 1.6 3 3.5 3 5.5 0 2.2-1.4 4.1-3 5.5-1.6-1.4-3-3.3-3-5.5 0-2 1.4-3.9 3-5.5z" />
+              </svg>
+            </span>
+            <p className="font-display text-2xl font-medium tracking-[-0.01em]">
+              Fukuda Laboratory
+            </p>
+          </div>
+          <p className="mt-5 max-w-md text-[14px] leading-relaxed text-sand/80">
             慶應義塾大学先端生命科学研究所 福田真嗣研究室。腸内環境制御学・統合オミクス科学を軸に、
             腸内デザイン学の社会実装を目指しています。
           </p>
-          <p className="mt-6 text-[12px] uppercase tracking-[0.2em] text-mute">
+          <p className="mt-6 text-[12px] uppercase tracking-wider text-sand/60">
             〒997-0052 山形県鶴岡市覚岸寺字水上 246-2
           </p>
+
+          <Link href="/contact" className="btn-primary mt-8">
+            Get in touch
+            <span aria-hidden>→</span>
+          </Link>
         </div>
 
         <div className="md:col-span-3">
-          <p className="eyebrow">Sitemap</p>
-          <ul className="mt-4 space-y-2 text-sm">
+          <p className="eyebrow !text-gold">Sitemap</p>
+          <ul className="mt-5 space-y-2.5 text-[14px]">
             {navItems.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="link-underline">
+                <Link href={item.href} className="link-grow text-sand/90">
                   {item.label}
                 </Link>
               </li>
@@ -35,28 +49,27 @@ export function SiteFooter() {
         </div>
 
         <div className="md:col-span-4">
-          <p className="eyebrow">Contact</p>
-          <p className="mt-4 text-sm leading-relaxed">
-            E-mail&nbsp;
-            <span className="font-mono text-[13px]">fukuda-lab [at] iab.keio.ac.jp</span>
+          <p className="eyebrow !text-gold">Contact</p>
+          <p className="mt-5 text-[14px] leading-relaxed text-sand/90">
+            <span className="font-mono text-[14px]">fukuda-lab [at] iab.keio.ac.jp</span>
             <br />
-            <span className="text-mute">※ [at] を @ に変換してください</span>
+            <span className="text-sand/60">※ [at] を @ に変換してください</span>
           </p>
-          <div className="mt-6 flex flex-col gap-1 text-[12px] uppercase tracking-[0.2em] text-mute">
-            <a className="link-underline" href="https://www.keio.ac.jp/" target="_blank" rel="noreferrer">
-              Keio University ↗
+          <div className="mt-7 flex flex-col gap-2 text-[13px] text-sand/80">
+            <a className="link-grow w-fit" href="https://www.keio.ac.jp/" target="_blank" rel="noreferrer">
+              ↗ Keio University
             </a>
-            <a className="link-underline" href="https://www.iab.keio.ac.jp/" target="_blank" rel="noreferrer">
-              IAB ↗
+            <a className="link-grow w-fit" href="https://www.iab.keio.ac.jp/" target="_blank" rel="noreferrer">
+              ↗ Institute for Advanced Biosciences
             </a>
-            <a className="link-underline" href="https://metagen.co.jp/" target="_blank" rel="noreferrer">
-              Metagen Inc. ↗
+            <a className="link-grow w-fit" href="https://metagen.co.jp/" target="_blank" rel="noreferrer">
+              ↗ Metagen Inc.
             </a>
           </div>
         </div>
       </div>
 
-      <div className="container-edge flex flex-col items-start justify-between gap-2 border-t border-hairline py-6 text-[11px] uppercase tracking-[0.2em] text-mute md:flex-row">
+      <div className="container-edge flex flex-col items-start justify-between gap-2 border-t border-sand/10 py-6 text-[11px] uppercase tracking-wider text-sand/55 md:flex-row">
         <span>© {year} Fukuda Laboratory, Keio University</span>
         <span>Designed in Tsuruoka · Built with Next.js</span>
       </div>

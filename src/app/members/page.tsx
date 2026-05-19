@@ -6,34 +6,34 @@ export const metadata = { title: "Members" };
 
 function MemberCard({ member }: { member: Member }) {
   return (
-    <article className="group grid grid-cols-[120px_1fr] gap-5">
-      <div className="relative aspect-[4/5] w-[120px] overflow-hidden bg-cream photo-mono">
+    <article className="card-soft overflow-hidden">
+      <div className="relative aspect-[4/5] w-full bg-sandDeep">
         <Image
           src={member.photo}
           alt={member.name}
           fill
-          sizes="120px"
+          sizes="(max-width: 768px) 100vw, 320px"
           className="object-cover"
         />
-      </div>
-      <div className="min-w-0">
-        <h4 className="font-serif text-lg leading-tight">{member.name}</h4>
-        <p className="font-serif text-[12px] italic text-mute">{member.nameEn}</p>
         {member.grade && (
-          <p className="mt-2 font-mono text-[10.5px] uppercase tracking-[0.2em] text-terracotta">
-            {member.grade}
-          </p>
+          <span className="absolute left-3 top-3 chip-orange">{member.grade}</span>
         )}
-        {member.field && <p className="mt-2 text-[12.5px] text-graphite">{member.field}</p>}
+      </div>
+      <div className="p-5">
+        <h4 className="font-display text-[18px] font-medium leading-tight text-bark">
+          {member.name}
+        </h4>
+        <p className="mt-0.5 text-[12px] tracking-wider text-barkMute">{member.nameEn}</p>
+        {member.field && <p className="mt-3 text-[13px] text-teal">{member.field}</p>}
         {member.affiliations?.length ? (
-          <ul className="mt-2 space-y-0.5 text-[11.5px] leading-snug text-mute">
+          <ul className="mt-2 space-y-0.5 text-[11.5px] leading-snug text-barkSoft">
             {member.affiliations.map((a) => (
               <li key={a}>{a}</li>
             ))}
           </ul>
         ) : null}
-        <ul className="mt-3 space-y-0.5 text-[11.5px] text-graphite">
-          {member.location && <li>↳ {member.location}</li>}
+        <ul className="mt-3 space-y-1 text-[12px] text-bark/85">
+          {member.location && <li>📍 {member.location}</li>}
           {member.email && <li className="font-mono">✉ {member.email}</li>}
           {member.links?.map((l) => (
             <li key={l.href}>
@@ -41,7 +41,7 @@ function MemberCard({ member }: { member: Member }) {
                 href={l.href}
                 target="_blank"
                 rel="noreferrer"
-                className="link-underline text-ink"
+                className="link-grow font-medium text-orange"
               >
                 ↗ {l.label}
               </a>
@@ -49,7 +49,7 @@ function MemberCard({ member }: { member: Member }) {
           ))}
         </ul>
         {member.likes && (
-          <p className="mt-3 border-t border-hairline pt-2 font-serif text-[12px] italic leading-snug text-graphite/85">
+          <p className="mt-4 rounded-soft bg-sand/60 px-3 py-2.5 text-[12px] leading-snug text-bark/80">
             “{member.likes}”
           </p>
         )}
@@ -62,79 +62,79 @@ export default function MembersPage() {
   return (
     <div>
       <PageMasthead
-        eyebrow="§ 03 — Members"
-        title="The"
-        italic="people."
+        eyebrow="Members"
+        title="メンバー"
+        accent="The people."
         lede="研究を支えるのは、共に問いと向き合うひとり一人のメンバーです。"
       />
 
-      <section className="container-edge mt-14">
-        <div className="mb-8 flex items-baseline gap-4">
-          <p className="eyebrow">Principal Investigator</p>
-          <span className="h-px flex-1 bg-hairline" />
-        </div>
-
-        <div className="grid gap-10 md:grid-cols-[280px_1fr]">
-          <div className="relative aspect-[4/5] w-full max-w-[280px] overflow-hidden bg-cream photo-mono">
-            <Image
-              src={pi.photo}
-              alt={pi.name}
-              fill
-              sizes="(max-width: 768px) 100vw, 280px"
-              className="object-cover"
-            />
-          </div>
-          <div>
-            <h3 className="font-serif text-5xl font-light leading-none">{pi.name}</h3>
-            <p className="mt-2 font-serif text-lg italic text-mute">{pi.nameEn}</p>
-            <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.2em] text-terracotta">
-              {pi.title}
-            </p>
-            <ul className="mt-3 space-y-0.5 text-[13.5px] text-graphite">
-              {pi.affiliations?.map((a) => (
-                <li key={a}>{a}</li>
-              ))}
-            </ul>
-            <p className="mt-5 font-serif text-[15px] italic">{pi.field}</p>
-            <ul className="mt-5 space-y-1 text-[13px] text-graphite">
-              <li>↳ {pi.location}</li>
-              <li className="font-mono">✉ {pi.email}</li>
-              {pi.links?.map((l) => (
-                <li key={l.href}>
-                  <a
-                    href={l.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="link-underline text-ink"
-                  >
-                    ↗ {l.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-            {pi.likes && (
-              <p className="mt-6 border-t border-hairline pt-4 font-serif italic text-graphite/85">
-                好きなもの — {pi.likes}
+      {/* PI feature card */}
+      <section className="container-edge mt-16">
+        <article className="overflow-hidden rounded-chunk bg-ivory shadow-soft">
+          <div className="grid gap-0 md:grid-cols-12">
+            <div className="relative md:col-span-5">
+              <div className="relative h-full min-h-[420px] w-full">
+                <Image
+                  src={pi.photo}
+                  alt={pi.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 520px"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+            <div className="md:col-span-7 p-8 md:p-12">
+              <span className="chip-teal">Principal Investigator</span>
+              <h3 className="display-h mt-5 text-4xl md:text-5xl">{pi.name}</h3>
+              <p className="mt-2 text-[14px] tracking-wider text-barkMute">{pi.nameEn}</p>
+              <p className="mt-5 inline-flex rounded-pill bg-orange/10 px-3.5 py-1.5 text-[12px] font-medium text-orange">
+                {pi.title}
               </p>
-            )}
+              <ul className="mt-5 space-y-1 text-[13.5px] text-bark/85">
+                {pi.affiliations?.map((a) => (
+                  <li key={a}>· {a}</li>
+                ))}
+              </ul>
+              <p className="mt-5 text-[15px] font-medium text-teal">{pi.field}</p>
+              <ul className="mt-5 space-y-1 text-[13px] text-bark">
+                <li>📍 {pi.location}</li>
+                <li className="font-mono">✉ {pi.email}</li>
+                {pi.links?.map((l) => (
+                  <li key={l.href}>
+                    <a
+                      href={l.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="link-grow font-medium text-orange"
+                    >
+                      ↗ {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              {pi.likes && (
+                <p className="mt-6 rounded-soft bg-sand/70 px-4 py-3 text-[13.5px] text-bark/85">
+                  好きなもの — {pi.likes}
+                </p>
+              )}
+            </div>
           </div>
-        </div>
+        </article>
       </section>
 
       {memberGroups.map((group) => (
-        <section key={group.heading} className="container-edge mt-24">
-          <div className="mb-10 flex items-baseline gap-4">
-            <p className="eyebrow">{group.heading}</p>
+        <section key={group.heading} className="container-edge mt-20">
+          <div className="mb-8 flex flex-wrap items-baseline gap-3">
+            <h2 className="display-h text-3xl text-bark md:text-[32px]">{group.heading}</h2>
             {group.subheading && (
-              <p className="font-serif text-sm italic text-mute">— {group.subheading}</p>
+              <p className="text-[14px] text-barkMute">— {group.subheading}</p>
             )}
-            <span className="h-px flex-1 bg-hairline" />
-            <span className="font-mono text-[11px] tracking-widest text-mute">
-              {String(group.members.length).padStart(2, "0")}
+            <span className="ml-auto chip">
+              {String(group.members.length).padStart(2, "0")} members
             </span>
           </div>
 
-          <div className="grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {group.members.map((m, i) => (
               <MemberCard key={`${m.nameEn}-${i}`} member={m} />
             ))}

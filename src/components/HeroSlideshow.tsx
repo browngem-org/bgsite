@@ -21,7 +21,7 @@ export function HeroSlideshow({ slides }: { slides: Slide[] }) {
 
   return (
     <div className="relative">
-      <div className="relative aspect-[3/2] w-full overflow-hidden bg-cream photo-mono">
+      <div className="relative aspect-[16/9] w-full overflow-hidden rounded-chunk bg-sandDeep shadow-soft">
         {slides.map((slide, i) => (
           <Image
             key={slide.src}
@@ -29,30 +29,29 @@ export function HeroSlideshow({ slides }: { slides: Slide[] }) {
             alt={slide.alt}
             fill
             priority={i === 0}
-            sizes="(max-width: 768px) 100vw, 1180px"
+            sizes="(max-width: 768px) 100vw, 1240px"
             className={`object-cover transition-opacity duration-[1.2s] ease-in-out ${
               i === active ? "opacity-100" : "opacity-0"
             }`}
           />
         ))}
+        <div className="absolute bottom-5 left-5 inline-flex items-center gap-2 rounded-pill bg-ivory/90 px-3 py-1.5 text-[12px] font-medium tracking-wider text-bark backdrop-blur">
+          <span className="h-1.5 w-1.5 rounded-full bg-orange" />
+          {slides[active]?.caption}
+        </div>
       </div>
 
-      <div className="mt-4 flex items-center justify-between">
-        <p className="font-serif text-sm italic text-graphite/80">
-          {slides[active]?.caption}
-        </p>
-        <div className="flex items-center gap-3">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActive(i)}
-              aria-label={`Show slide ${i + 1}`}
-              className={`h-px transition-all ${
-                i === active ? "w-10 bg-ink" : "w-6 bg-hairline hover:bg-graphite"
-              }`}
-            />
-          ))}
-        </div>
+      <div className="mt-5 flex items-center justify-end gap-2">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            aria-label={`Show slide ${i + 1}`}
+            className={`h-1.5 rounded-full transition-all ${
+              i === active ? "w-10 bg-orange" : "w-3 bg-line hover:bg-barkMute"
+            }`}
+          />
+        ))}
       </div>
     </div>
   );

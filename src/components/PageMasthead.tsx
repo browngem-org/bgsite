@@ -4,10 +4,10 @@ export function PageMasthead({
   accent,
   lede
 }: {
-  eyebrow: string;
-  title: string;
-  accent?: string;
-  lede?: string;
+  eyebrow: React.ReactNode;
+  title: React.ReactNode;
+  accent?: React.ReactNode;
+  lede?: React.ReactNode;
 }) {
   return (
     <section className="relative overflow-hidden bg-sandLight">

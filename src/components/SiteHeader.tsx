@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { SiteNav } from "./SiteNav";
+import { LanguageToggle } from "./LanguageToggle";
+import { T } from "./T";
 
 export function SiteHeader() {
   return (
@@ -19,20 +21,28 @@ export function SiteHeader() {
               Fukuda Laboratory
             </span>
             <span className="mt-0.5 text-[11px] tracking-wider text-barkMute">
-              福田真嗣研究室 — Designing the Gut
+              <T
+                ja="福田真嗣研究室 — Designing the Gut"
+                en="Designing the gut microbiome"
+              />
             </span>
           </span>
         </Link>
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <Link href="/contact" className="btn-ghost">
-            Contact
+        <div className="flex items-center gap-3">
+          <LanguageToggle className="hidden sm:inline-flex" />
+          <Link href="/contact" className="btn-ghost hidden lg:inline-flex">
+            <T ja="お問い合わせ" en="Contact" />
           </Link>
-          <Link href="/members" className="btn-primary">
-            Join the lab
+          <Link href="/members" className="btn-primary hidden lg:inline-flex">
+            <T ja="ラボに参加" en="Join the lab" />
             <span aria-hidden>→</span>
           </Link>
         </div>
+      </div>
+
+      <div className="container-edge sm:hidden pb-3">
+        <LanguageToggle />
       </div>
 
       <SiteNav />

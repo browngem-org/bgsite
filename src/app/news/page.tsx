@@ -1,5 +1,6 @@
 import { PageMasthead } from "@/components/PageMasthead";
 import { NewsFilter } from "@/components/NewsFilter";
+import { T } from "@/components/T";
 
 export const metadata = { title: "News" };
 
@@ -8,9 +9,14 @@ export default function NewsPage() {
     <div>
       <PageMasthead
         eyebrow="News"
-        title="お知らせ"
-        accent="& Notes."
-        lede="論文発表、受賞、メディア掲載など、研究室の最新トピックスをまとめています。"
+        title={<T ja="お知らせ" en="News" />}
+        accent={<T ja="& Notes." en="& Notes." />}
+        lede={
+          <T
+            ja="論文発表、受賞、メディア掲載など、研究室の最新トピックスをまとめています。"
+            en="Recent papers, awards, and media appearances from the lab."
+          />
+        }
       />
       <section className="container-edge mt-16">
         <NewsFilter />

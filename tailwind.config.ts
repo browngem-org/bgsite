@@ -35,6 +35,11 @@ const config: Config = {
           "system-ui",
           "sans-serif"
         ],
+        serif: [
+          "var(--font-cormorant)",
+          "Georgia",
+          "serif"
+        ],
         mono: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"]
       },
       letterSpacing: {

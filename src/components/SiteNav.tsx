@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navItems } from "@/data/nav";
+import { useLang } from "@/i18n/LanguageProvider";
 
 export function SiteNav() {
   const pathname = usePathname();
+  const { lang } = useLang();
 
   return (
     <nav className="border-y border-line/70 bg-sand/40">
@@ -29,7 +31,7 @@ export function SiteNav() {
                   <span className="text-[10px] tracking-wider opacity-60">
                     {item.index}
                   </span>
-                  <span>{item.label}</span>
+                  <span>{lang === "en" ? item.labelEn : item.label}</span>
                 </Link>
               </li>
             );

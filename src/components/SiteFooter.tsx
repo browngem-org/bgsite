@@ -1,8 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { navItems } from "@/data/nav";
+import { useLang } from "@/i18n/LanguageProvider";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
+  const { lang } = useLang();
 
   return (
     <footer className="mt-32 bg-bark text-sand">
@@ -22,15 +26,18 @@ export function SiteFooter() {
             </p>
           </div>
           <p className="mt-5 max-w-md text-[14px] leading-relaxed text-sand/80">
-            慶應義塾大学先端生命科学研究所 福田真嗣研究室。腸内環境制御学・統合オミクス科学を軸に、
-            腸内デザイン学の社会実装を目指しています。
+            {lang === "en"
+              ? "Fukuda Laboratory at the Institute for Advanced Biosciences, Keio University. We pursue the social implementation of gut-design science through integrated multi-omics research."
+              : "慶應義塾大学先端生命科学研究所 福田真嗣研究室。腸内環境制御学・統合オミクス科学を軸に、腸内デザイン学の社会実装を目指しています。"}
           </p>
           <p className="mt-6 text-[12px] uppercase tracking-wider text-sand/60">
-            〒997-0052 山形県鶴岡市覚岸寺字水上 246-2
+            {lang === "en"
+              ? "246-2 Mizukami, Kakuganji, Tsuruoka, Yamagata 997-0052"
+              : "〒997-0052 山形県鶴岡市覚岸寺字水上 246-2"}
           </p>
 
           <Link href="/contact" className="btn-primary mt-8">
-            Get in touch
+            {lang === "en" ? "Get in touch" : "お問い合わせ"}
             <span aria-hidden>→</span>
           </Link>
         </div>
@@ -41,7 +48,7 @@ export function SiteFooter() {
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="link-grow text-sand/90">
-                  {item.label}
+                  {lang === "en" ? item.labelEn : item.label}
                 </Link>
               </li>
             ))}
@@ -53,7 +60,9 @@ export function SiteFooter() {
           <p className="mt-5 text-[14px] leading-relaxed text-sand/90">
             <span className="font-mono text-[14px]">fukuda-lab [at] iab.keio.ac.jp</span>
             <br />
-            <span className="text-sand/60">※ [at] を @ に変換してください</span>
+            <span className="text-sand/60">
+              {lang === "en" ? "Replace [at] with @." : "※ [at] を @ に変換してください"}
+            </span>
           </p>
           <div className="mt-7 flex flex-col gap-2 text-[13px] text-sand/80">
             <a className="link-grow w-fit" href="https://www.keio.ac.jp/" target="_blank" rel="noreferrer">

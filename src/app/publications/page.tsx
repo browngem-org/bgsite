@@ -1,5 +1,7 @@
 import { PageMasthead } from "@/components/PageMasthead";
+import { PublicationsCount } from "@/components/PublicationsCount";
 import { publicationsByYear } from "@/data/publications";
+import { T } from "@/components/T";
 
 export const metadata = { title: "Publications" };
 
@@ -24,9 +26,14 @@ export default function PublicationsPage() {
     <div>
       <PageMasthead
         eyebrow="Publications"
-        title="論文一覧"
-        accent="Selected Works."
-        lede={`査読付き原著論文を中心に、研究室の出版実績をまとめています。総計 ${total} 編。`}
+        title={<T ja="論文一覧" en="Publications" />}
+        accent={<T ja="Selected Works." en="Selected Works." />}
+        lede={
+          <T
+            ja={`査読付き原著論文を中心に、研究室の出版実績をまとめています。総計 ${total} 編。`}
+            en={`Peer-reviewed original papers and reviews from the lab. ${total} entries in total.`}
+          />
+        }
       />
 
       <section className="container-edge mt-16 space-y-20">
@@ -35,9 +42,7 @@ export default function PublicationsPage() {
             <div className="flex items-baseline gap-5">
               <h2 className="display-h text-5xl text-bark md:text-6xl">{y.year}</h2>
               <span className="h-px flex-1 bg-line" />
-              <span className="font-mono text-[11px] tracking-wider text-barkMute">
-                {y.items.length} {y.items.length === 1 ? "paper" : "papers"}
-              </span>
+              <PublicationsCount count={y.items.length} />
             </div>
 
             <ol className="mt-8 space-y-4">

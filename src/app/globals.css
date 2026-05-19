@@ -27,7 +27,9 @@
   }
 
   .eyebrow {
-    @apply font-display text-[11px] font-medium uppercase tracking-widest text-orange;
+    @apply font-serif italic text-[18px] font-medium tracking-wide text-orange;
+    text-transform: none;
+    letter-spacing: 0.01em;
   }
 
   .display-h {

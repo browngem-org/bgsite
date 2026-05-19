@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { newsItems, categoryLabel, type NewsCategory, type NewsItem } from "@/data/news";
+import { useLang } from "@/i18n/LanguageProvider";
 
 type Filter = "all" | NewsCategory;
 
@@ -16,6 +17,7 @@ const filters: { value: Filter; label: string }[] = [
 
 export function NewsFilter() {
   const [active, setActive] = useState<Filter>("all");
+  const { lang } = useLang();
 
   const grouped = useMemo(() => {
     const filtered =
@@ -28,6 +30,9 @@ export function NewsFilter() {
     }
     return [...byYear.entries()].sort((a, b) => Number(b[0]) - Number(a[0]));
   }, [active]);
+
+  const empty = lang === "en" ? "No items match." : "該当する項目はありません。";
+  const entriesWord = lang === "en" ? "entries" : "件";
 
   return (
     <div>
@@ -52,7 +57,7 @@ export function NewsFilter() {
 
       <div className="mt-14 space-y-16">
         {grouped.length === 0 ? (
-          <p className="text-bark/70">該当する項目はありません。</p>
+          <p className="text-bark/70">{empty}</p>
         ) : (
           grouped.map(([year, items]) => (
             <section key={year}>
@@ -60,7 +65,7 @@ export function NewsFilter() {
                 <h2 className="display-h text-5xl text-bark md:text-6xl">{year}</h2>
                 <span className="h-px flex-1 bg-line" />
                 <span className="font-mono text-[11px] tracking-wider text-barkMute">
-                  {items.length} entries
+                  {items.length} {entriesWord}
                 </span>
               </div>
 
@@ -72,7 +77,7 @@ export function NewsFilter() {
                       <span className="font-mono text-[12px] text-barkMute">{item.date}</span>
                     </div>
                     <p className="mt-4 text-[14.5px] leading-relaxed text-bark">
-                      {item.body}{" "}
+                      {lang === "en" ? item.bodyEn : item.body}{" "}
                       {item.href && (
                         <a
                           href={item.href}
@@ -80,7 +85,10 @@ export function NewsFilter() {
                           rel="noreferrer"
                           className="link-grow font-medium text-orange"
                         >
-                          {item.hrefLabel ?? "詳細"} ↗
+                          {lang === "en"
+                            ? item.hrefLabelEn ?? "Read more"
+                            : item.hrefLabel ?? "詳細"}{" "}
+                          ↗
                         </a>
                       )}
                     </p>

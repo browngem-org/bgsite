@@ -2,15 +2,18 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useLang } from "@/i18n/LanguageProvider";
 
 type Slide = {
   src: string;
   alt: string;
   caption: string;
+  captionEn?: string;
 };
 
 export function HeroSlideshow({ slides }: { slides: Slide[] }) {
   const [active, setActive] = useState(0);
+  const { lang } = useLang();
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -18,6 +21,9 @@ export function HeroSlideshow({ slides }: { slides: Slide[] }) {
     }, 5000);
     return () => clearInterval(id);
   }, [slides.length]);
+
+  const current = slides[active];
+  const caption = lang === "en" && current?.captionEn ? current.captionEn : current?.caption;
 
   return (
     <div className="relative">
@@ -37,7 +43,7 @@ export function HeroSlideshow({ slides }: { slides: Slide[] }) {
         ))}
         <div className="absolute bottom-5 left-5 inline-flex items-center gap-2 rounded-pill bg-ivory/90 px-3 py-1.5 text-[12px] font-medium tracking-wider text-bark backdrop-blur">
           <span className="h-1.5 w-1.5 rounded-full bg-orange" />
-          {slides[active]?.caption}
+          {caption}
         </div>
       </div>
 

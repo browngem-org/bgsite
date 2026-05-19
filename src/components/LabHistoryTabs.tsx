@@ -3,10 +3,16 @@
 import Image from "next/image";
 import { useState } from "react";
 import { historyEntries } from "@/data/lab";
+import { useLang } from "@/i18n/LanguageProvider";
 
 export function LabHistoryTabs() {
   const [active, setActive] = useState(historyEntries[0].id);
   const current = historyEntries.find((h) => h.id === active) ?? historyEntries[0];
+  const { lang } = useLang();
+
+  const title = (h: (typeof historyEntries)[number]) =>
+    lang === "en" ? h.titleEn : h.title;
+  const desc = lang === "en" ? current.descriptionEn : current.description;
 
   return (
     <div>
@@ -23,7 +29,7 @@ export function LabHistoryTabs() {
                   : "border border-line bg-ivory text-bark hover:border-orange hover:text-orange"
               }`}
             >
-              {h.title}
+              {title(h)}
             </button>
           );
         })}
@@ -32,11 +38,9 @@ export function LabHistoryTabs() {
       <div key={current.id} className="mt-10 animate-fadeIn rounded-chunk bg-ivory p-7 shadow-ring md:p-10">
         <div className="flex items-baseline gap-3">
           <span className="chip-teal">{current.date}</span>
-          <h3 className="font-display text-xl font-medium text-bark">{current.title}</h3>
+          <h3 className="font-display text-xl font-medium text-bark">{title(current)}</h3>
         </div>
-        <p className="mt-4 max-w-3xl text-[14.5px] leading-relaxed text-bark/90">
-          {current.description}
-        </p>
+        <p className="mt-4 max-w-3xl text-[14.5px] leading-relaxed text-bark/90">{desc}</p>
 
         <div className="mt-7 -mx-2 flex gap-4 overflow-x-auto px-2 pb-2">
           {current.photos.map((src, i) => (
@@ -46,7 +50,7 @@ export function LabHistoryTabs() {
             >
               <Image
                 src={src}
-                alt={`${current.title} ${i + 1}`}
+                alt={`${title(current)} ${i + 1}`}
                 fill
                 sizes="380px"
                 className="object-cover"

@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { PageMasthead } from "@/components/PageMasthead";
 import { LabHistoryTabs } from "@/components/LabHistoryTabs";
-import { labScenes, equipment } from "@/data/lab";
+import { EquipmentList } from "@/components/EquipmentList";
+import { labScenes } from "@/data/lab";
+import { T } from "@/components/T";
 
 export const metadata = { title: "Our Laboratory" };
 
@@ -10,9 +12,14 @@ export default function LaboratoryPage() {
     <div>
       <PageMasthead
         eyebrow="Our Laboratory"
-        title="ラボの中身"
-        accent="Inside the lab."
-        lede="鶴岡の地で、アットホームな雰囲気のなか、研究に集中できる環境作りを大切にしています。"
+        title={<T ja="ラボの中身" en="Our Laboratory" />}
+        accent={<T ja="Inside the lab." en="Inside the lab." />}
+        lede={
+          <T
+            ja="鶴岡の地で、アットホームな雰囲気のなか、研究に集中できる環境作りを大切にしています。"
+            en="A welcoming environment in Tsuruoka where researchers can focus on the work."
+          />
+        }
       />
 
       <section className="container-edge mt-12">
@@ -32,9 +39,13 @@ export default function LaboratoryPage() {
         <div className="flex items-end justify-between gap-6">
           <div>
             <p className="eyebrow">Lab scenes</p>
-            <h2 className="display-h mt-3 text-3xl md:text-4xl">研究室の日常</h2>
+            <h2 className="display-h mt-3 text-3xl md:text-4xl">
+              <T ja="研究室の日常" en="A day in the lab" />
+            </h2>
           </div>
-          <p className="hidden text-[13px] text-barkMute md:block">A glimpse of daily life</p>
+          <p className="hidden text-[13px] text-barkMute md:block">
+            <T ja="A glimpse of daily life" en="A glimpse of daily life" />
+          </p>
         </div>
 
         <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3">
@@ -61,10 +72,15 @@ export default function LaboratoryPage() {
         <div className="flex items-end justify-between gap-6">
           <div>
             <p className="eyebrow">Our history</p>
-            <h2 className="display-h mt-3 text-3xl md:text-4xl">研究室の歴史</h2>
+            <h2 className="display-h mt-3 text-3xl md:text-4xl">
+              <T ja="研究室の歴史" en="Our history" />
+            </h2>
           </div>
           <p className="hidden text-[13px] italic text-barkMute md:block">
-            いい研究をするためには、ときに遊ぶことも大事です
+            <T
+              ja="いい研究をするためには、ときに遊ぶことも大事です"
+              en="Good research, with a side of play"
+            />
           </p>
         </div>
 
@@ -76,17 +92,11 @@ export default function LaboratoryPage() {
       <section className="container-edge mt-28">
         <div className="rounded-chunk bg-bark p-10 text-sand md:p-14">
           <p className="eyebrow !text-gold">Principal equipment</p>
-          <h2 className="display-h mt-3 text-3xl text-sand md:text-4xl">主な設備</h2>
+          <h2 className="display-h mt-3 text-3xl text-sand md:text-4xl">
+            <T ja="主な設備" en="Principal equipment" />
+          </h2>
 
-          <ul className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {equipment.map((e) => (
-              <li key={e.name} className="rounded-soft border border-sand/15 bg-sand/5 p-5">
-                <p className="text-[11px] uppercase tracking-wider text-gold">Apparatus</p>
-                <p className="mt-2 font-display text-lg font-medium">{e.name}</p>
-                <p className="mt-1 text-[13px] text-sand/85">{e.detail}</p>
-              </li>
-            ))}
-          </ul>
+          <EquipmentList />
         </div>
       </section>
     </div>

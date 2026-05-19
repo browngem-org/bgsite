@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import { newsItems, categoryLabel, type NewsCategory, type NewsItem } from "@/data/news";
 import { useLang } from "@/i18n/LanguageProvider";
@@ -71,27 +72,42 @@ export function NewsFilter() {
 
               <ul className="mt-8 grid gap-4 md:grid-cols-2">
                 {items.map((item, i) => (
-                  <li key={i} className="card-soft p-6">
-                    <div className="flex items-center gap-3">
-                      <span className="chip-orange">{categoryLabel[item.category]}</span>
-                      <span className="font-mono text-[12px] text-barkMute">{item.date}</span>
+                  <li key={i} className="card-soft overflow-hidden">
+                    {item.image ? (
+                      <div className="relative aspect-[16/9] w-full bg-sandDeep">
+                        <Image
+                          src={item.image.src}
+                          alt={item.image.alt}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          className="object-cover"
+                        />
+                      </div>
+                    ) : null}
+                    <div className="p-6">
+                      <div className="flex items-center gap-3">
+                        <span className="chip-orange">{categoryLabel[item.category]}</span>
+                        <span className="font-mono text-[12px] text-barkMute">
+                          {item.date}
+                        </span>
+                      </div>
+                      <p className="mt-4 text-[14.5px] leading-relaxed text-bark">
+                        {lang === "en" ? item.bodyEn : item.body}{" "}
+                        {item.href && (
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="link-grow font-medium text-orange"
+                          >
+                            {lang === "en"
+                              ? item.hrefLabelEn ?? "Read more"
+                              : item.hrefLabel ?? "詳細"}{" "}
+                            ↗
+                          </a>
+                        )}
+                      </p>
                     </div>
-                    <p className="mt-4 text-[14.5px] leading-relaxed text-bark">
-                      {lang === "en" ? item.bodyEn : item.body}{" "}
-                      {item.href && (
-                        <a
-                          href={item.href}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="link-grow font-medium text-orange"
-                        >
-                          {lang === "en"
-                            ? item.hrefLabelEn ?? "Read more"
-                            : item.hrefLabel ?? "詳細"}{" "}
-                          ↗
-                        </a>
-                      )}
-                    </p>
                   </li>
                 ))}
               </ul>

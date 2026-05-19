@@ -1,5 +1,10 @@
 export type NewsCategory = "paper" | "award" | "event" | "media" | "info";
 
+export type NewsImage = {
+  src: string;
+  alt: string;
+};
+
 export type NewsItem = {
   date: string;
   category: NewsCategory;
@@ -8,6 +13,8 @@ export type NewsItem = {
   href?: string;
   hrefLabel?: string;
   hrefLabelEn?: string;
+  /** 🐱 optional — when set, renders a thumbnail in feeds and a hero on /news cards */
+  image?: NewsImage;
 };
 
 export const newsItems: NewsItem[] = [

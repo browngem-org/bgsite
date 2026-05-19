@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SiteNav } from "./SiteNav";
 import { LanguageToggle } from "./LanguageToggle";
-import { T } from "./T";
+import { StableLabel } from "./StableLabel";
 
 export function SiteHeader() {
   return (
@@ -21,7 +21,7 @@ export function SiteHeader() {
               Fukuda Laboratory
             </span>
             <span className="mt-0.5 text-[11px] tracking-wider text-barkMute">
-              <T
+              <StableLabel
                 ja="福田真嗣研究室 — Designing the Gut"
                 en="Designing the gut microbiome"
               />
@@ -32,10 +32,10 @@ export function SiteHeader() {
         <div className="flex items-center gap-3">
           <LanguageToggle className="hidden sm:inline-flex" />
           <Link href="/contact" className="btn-ghost hidden lg:inline-flex">
-            <T ja="お問い合わせ" en="Contact" />
+            <StableLabel ja="お問い合わせ" en="Contact" />
           </Link>
           <Link href="/members" className="btn-primary hidden lg:inline-flex">
-            <T ja="ラボに参加" en="Join the lab" />
+            <StableLabel ja="ラボに参加" en="Join the lab" />
             <span aria-hidden>→</span>
           </Link>
         </div>

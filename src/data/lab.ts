@@ -5,7 +5,7 @@ export type LabPhoto = {
 
 export const labScenes: LabPhoto[] = [
   {
-    src: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=900",
+    src: "https://raw.githubusercontent.com/browngem-org/photo/main/laboratory/laboverview.jpeg",
     caption: "Lab Overview"
   },
   {

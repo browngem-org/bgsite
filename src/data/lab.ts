@@ -42,6 +42,22 @@ export type HistoryEntry = {
 
 export const historyEntries: HistoryEntry[] = [
   {
+    id: "lunchmtg2603",
+    title: "ランチミーティング",
+    titleEn: "Lab Lunch Meeting",
+    date: "2026.03",
+    description:
+      "今回のランチミーティングでは、M2 池田さんの納豆カレーとM2 岡本さんのタコスをいただきました。今学期をもってM2 岡本さんはご卒業されます。お疲れ様でした！",
+    descriptionEn:
+      "At this lunch meeting we shared natto curry from Ikeda (M2) and tacos from Okamoto (M2). Okamoto is graduating at the end of this term — thank you for everything!",
+    photos: [
+      "https://raw.githubusercontent.com/browngem-org/photo/main/activities/lunchmtg2603/IMG_6693.jpeg",
+      "https://raw.githubusercontent.com/browngem-org/photo/main/activities/lunchmtg2603/IMG_6697.jpeg",
+      "https://raw.githubusercontent.com/browngem-org/photo/main/activities/lunchmtg2603/IMG_6713.jpeg",
+      "https://raw.githubusercontent.com/browngem-org/photo/main/activities/lunchmtg2603/IMG_6720.jpeg"
+    ]
+  },
+  {
     id: "iab2026",
     title: "IAB合宿 2026 冬",
     titleEn: "IAB Winter Retreat 2026",

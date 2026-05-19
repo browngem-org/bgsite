@@ -9,9 +9,9 @@ import { memberGroups, pi } from "@/data/members";
 const slides = [
   {
     src: "https://raw.githubusercontent.com/browngem-org/photo/bc3c221d8ec510b62532d662dfd41a511a0a8eb4/laboratory/Labo.jpg",
-    alt: "Laboratory",
-    caption: "鶴岡のラボにて",
-    captionEn: "In the lab — Tsuruoka"
+    alt: "Korea retreat 2025",
+    caption: "韓国合宿 2025",
+    captionEn: "Korea retreat 2025"
   },
   {
     src: "https://raw.githubusercontent.com/browngem-org/photo/bc3c221d8ec510b62532d662dfd41a511a0a8eb4/laboratory/LaboKorea.jpg",

@@ -10,18 +10,18 @@ export function SiteNav() {
 
   return (
     <nav className="border-y border-line/70 bg-sand/40">
-      <div className="container-edge overflow-x-auto">
-        <ul className="flex min-w-max items-center gap-1 py-1">
+      <div className="container-edge py-1.5">
+        <ul className="grid grid-cols-4 gap-1 sm:grid-cols-8">
           {navItems.map((item) => {
             const isActive =
               item.href === "/"
                 ? pathname === "/"
                 : pathname?.startsWith(item.href);
             return (
-              <li key={item.href}>
+              <li key={item.href} className="flex justify-center">
                 <Link
                   href={item.href}
-                  className={`relative inline-flex items-center gap-1.5 rounded-pill px-4 py-2 text-[13px] font-medium tracking-wider transition-colors ${
+                  className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-pill px-3 py-2 text-[12.5px] font-medium tracking-wider transition-colors md:text-[13px] ${
                     isActive
                       ? "bg-bark text-sand"
                       : "text-bark hover:bg-sandDeep/60"

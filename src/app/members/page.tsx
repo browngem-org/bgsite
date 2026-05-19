@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { PageMasthead } from "@/components/PageMasthead";
-import { pi, memberGroups, type Member } from "@/data/members";
+import { pi, memberGroups, alumni, type Member } from "@/data/members";
 import { useLang } from "@/i18n/LanguageProvider";
 import { T } from "@/components/T";
 
@@ -175,6 +175,51 @@ export default function MembersPage() {
           </div>
         </section>
       ))}
+
+      {/* Alumni — name + grad year + program only */}
+      <section className="container-edge mt-24">
+        <div className="mb-8 flex flex-wrap items-baseline gap-3">
+          <h2 className="display-h text-3xl text-bark md:text-[32px]">
+            {lang === "en" ? "Alumni" : "アラムナイ"}
+          </h2>
+          <p className="text-[14px] text-barkMute">
+            — {lang === "en" ? "Past members" : "卒業生・元メンバー"}
+          </p>
+          <span className="ml-auto chip">
+            {String(alumni.length).padStart(2, "0")}
+          </span>
+        </div>
+
+        {alumni.length === 0 ? (
+          <p className="rounded-chunk border border-dashed border-line bg-ivory/60 px-6 py-10 text-center text-[14px] text-barkMute">
+            {lang === "en"
+              ? "Alumni records coming soon."
+              : "卒業生情報は順次掲載します。"}
+          </p>
+        ) : (
+          <ul className="overflow-hidden rounded-chunk border border-line bg-ivory">
+            {alumni.map((a, i) => (
+              <li
+                key={`${a.nameEn}-${i}`}
+                className="grid grid-cols-12 items-baseline gap-3 border-b border-line px-6 py-4 last:border-b-0 transition-colors hover:bg-sand/30"
+              >
+                <span className="col-span-4 font-mono text-[12px] tracking-wider text-barkMute md:col-span-2">
+                  {a.year}
+                </span>
+                <span className="col-span-8 text-[13px] text-teal md:col-span-3">
+                  {lang === "en" ? a.programEn : a.program}
+                </span>
+                <span className="col-span-12 font-display text-[16px] text-bark md:col-span-7">
+                  {lang === "en" ? a.nameEn : a.name}
+                  <span className="ml-2 text-[12px] tracking-wider text-barkMute">
+                    {lang === "en" ? a.name : a.nameEn}
+                  </span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </div>
   );
 }

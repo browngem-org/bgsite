@@ -32,6 +32,16 @@ export type MemberGroup = {
   members: Member[];
 };
 
+export type Alumnus = {
+  name: string;
+  nameEn: string;
+  /** e.g. "2024" — the year they graduated / left */
+  year: string;
+  /** Japanese program label, e.g. "博士課程", "修士課程", "学部" */
+  program: string;
+  programEn: string;
+};
+
 const placeholder =
   "https://raw.githubusercontent.com/browngem-org/photo/56ad964616fc6daf31c483c14a93b385affe8dec/foundate/unichi-makimaki.png";
 
@@ -281,4 +291,14 @@ export const memberGroups: MemberGroup[] = [
       }
     ]
   }
+];
+
+/**
+ * 🐱 Alumni — name + graduation year + program only.
+ * Excluded from the home page's member count.
+ * Add entries below as graduates leave the lab.
+ */
+export const alumni: Alumnus[] = [
+  // Placeholder examples — replace with real alumni
+  // { name: "山田 太郎", nameEn: "Taro YAMADA", year: "2024", program: "修士課程", programEn: "Master's" },
 ];

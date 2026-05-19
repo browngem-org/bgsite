@@ -1,9 +1,16 @@
+import Script from "next/script";
 import { PageMasthead } from "@/components/PageMasthead";
 import { PublicationsCount } from "@/components/PublicationsCount";
 import { TotalPapers } from "@/components/TotalPapers";
 import { publicationsByYear } from "@/data/publications";
 import { fetchCitation, throttledMap, type WorkInfo } from "@/lib/openalex";
 import { T } from "@/components/T";
+
+// 🐱 strip the "https://doi.org/" prefix Altmetric prefers the bare form
+function bareDoi(doi?: string): string | null {
+  if (!doi) return null;
+  return doi.replace(/^https?:\/\/(dx\.)?doi\.org\//i, "");
+}
 
 export const metadata = { title: "Publications" };
 // 🐱 re-fetch citation counts daily
@@ -56,6 +63,12 @@ export default async function PublicationsPage() {
 
   return (
     <div>
+      {/* 🐱 Altmetric embed badge script — auto-renders any .altmetric-embed div on the page */}
+      <Script
+        src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"
+        strategy="lazyOnload"
+      />
+
       <PageMasthead
         eyebrow="Publications"
         title={<T ja="論文一覧" en="Publications" />}
@@ -115,24 +128,36 @@ export default async function PublicationsPage() {
                     <span className="chip">{String(i + 1).padStart(2, "0")}</span>
                   </div>
                   <div className="col-span-12 md:col-span-11">
-                    <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div className="flex flex-wrap items-start justify-between gap-4">
                       <p className="font-display text-[18.5px] leading-snug text-bark md:text-[19.5px]">
                         {p.title}
                       </p>
-                      {p.cite ? (
-                        <a
-                          href={p.cite.doi ?? p.cite.openalexId ?? "#"}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="flex flex-shrink-0 items-center gap-1.5 rounded-pill border border-orange/30 bg-orange/10 px-3 py-1.5 text-[11.5px] font-medium text-orange transition-colors hover:bg-orange hover:text-white"
-                          aria-label={`${p.cite.citations} citations`}
-                        >
-                          <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current" aria-hidden>
-                            <path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z" />
-                          </svg>
-                          <span className="tabular-nums">{p.cite.citations}</span>
-                        </a>
-                      ) : null}
+                      <div className="flex flex-shrink-0 items-center gap-3">
+                        {bareDoi(p.cite?.doi) && (
+                          <div
+                            className="altmetric-embed flex-shrink-0"
+                            data-badge-type="donut"
+                            data-badge-popover="left"
+                            data-link-target="_blank"
+                            data-hide-no-mentions="true"
+                            data-doi={bareDoi(p.cite?.doi) ?? ""}
+                          />
+                        )}
+                        {p.cite ? (
+                          <a
+                            href={p.cite.doi ?? p.cite.openalexId ?? "#"}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex items-center gap-1.5 rounded-pill border border-orange/30 bg-orange/10 px-3 py-1.5 text-[11.5px] font-medium text-orange transition-colors hover:bg-orange hover:text-white"
+                            aria-label={`${p.cite.citations} citations`}
+                          >
+                            <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current" aria-hidden>
+                              <path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z" />
+                            </svg>
+                            <span className="tabular-nums">{p.cite.citations}</span>
+                          </a>
+                        ) : null}
+                      </div>
                     </div>
                     <p className="mt-2.5 text-[13.5px] leading-relaxed text-bark/85">
                       {renderAuthors(p.authors)}

@@ -13,7 +13,7 @@ export function StableLabel({ ja, en }: { ja: string; en: string }) {
     <span className="grid leading-none">
       <span
         aria-hidden={lang !== "ja"}
-        className={`col-start-1 row-start-1 transition-opacity duration-200 ${
+        className={`col-start-1 row-start-1 text-center transition-opacity duration-200 ${
           lang === "ja" ? "opacity-100" : "invisible opacity-0"
         }`}
       >
@@ -21,7 +21,7 @@ export function StableLabel({ ja, en }: { ja: string; en: string }) {
       </span>
       <span
         aria-hidden={lang !== "en"}
-        className={`col-start-1 row-start-1 transition-opacity duration-200 ${
+        className={`col-start-1 row-start-1 text-center transition-opacity duration-200 ${
           lang === "en" ? "opacity-100" : "invisible opacity-0"
         }`}
       >

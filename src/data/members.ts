@@ -186,8 +186,9 @@ export const memberGroups: MemberGroup[] = [
         nameEn: "Emily YAMAMOTO",
         grade: "B3",
         gradeEn: "B3",
-        location: "SFC",
-        locationEn: "SFC",
+        location: "SFC・順天堂大学",
+        locationEn: "SFC · Juntendo University",
+        email: "eymmt9 at keio.jp",
         photo: "https://raw.githubusercontent.com/browngem-org/photo/main/members/Yamamotosan.jpg"
       },
       {
@@ -261,6 +262,15 @@ export const memberGroups: MemberGroup[] = [
         email: "suzuki at iab.keio.ac.jp",
         photo:
           "https://www.kistec.jp/rikaston/wp-content/uploads/2018/09/826193519d92fa6efe7751923a2a55f8.png"
+      },
+      {
+        name: "押渕 浩太",
+        nameEn: "Kota OSHIBUCHI",
+        affiliations: ["株式会社資生堂"],
+        affiliationsEn: ["Shiseido Company, Limited"],
+        location: "資生堂",
+        locationEn: "Shiseido",
+        photo: "" // 🐱 TODO: 押渕さんの顔写真URLを設定する
       }
     ]
   }

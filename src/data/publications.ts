@@ -30,8 +30,8 @@ export const publicationsByYear: PublicationYear[] = [
       },
       {
         "title": "Complete genome sequence of Solobacterium moorei 10714-02 isolated from the stool of a human colorectal cancer patient",
-        "authors": "**Ayana Shinomiya**, **Kota Oshibuchi**, **Jiayue Yang**, **Shinji Fukuda**, Kazuharu Arakawa, Catherine Putonti",
-        "journal": "Microbiology Resource Announcements 2026"
+        "authors": "**Ayana Shinomiya**, **Kota Oshibuchi**, **Jiayue Yang**, **Shinji Fukuda**, Kazuharu Arakawa",
+        "journal": "Microbiology Resource Announcements 2026; 15: e00981-25"
       }
     ]
   },

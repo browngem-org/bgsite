@@ -171,8 +171,8 @@ export const memberGroups: MemberGroup[] = [
         nameEn: "Kohana ISHIKAWA",
         grade: "B4",
         gradeEn: "B4",
-        location: "藤沢ラボ",
-        locationEn: "Fujisawa Lab",
+        location: "SFC・筑波大学",
+        locationEn: "SFC · University of Tsukuba",
         email: "kohanalani at keio.jp",
         photo:
           "https://raw.githubusercontent.com/browngem-org/photo/b470e7f26eacd794595d4ccb8d52cb9fbe55db7d/members/Kohana.jpeg",
